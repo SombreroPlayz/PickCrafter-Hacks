@@ -1,0 +1,963 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"Pick Skill Cooldown"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2017-12-19
+  Author : Alpha
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//define(PickPwr,PickaxePowerController:UpdateCoolDownEvent+16)
+aobscan(PickPwr,D9 18 B8 68 * * * D9) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  fstp dword ptr [eax]
+  mov [eax],(float)0
+  jmp return
+
+PickPwr:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(PickPwr)
+
+[DISABLE]
+
+PickPwr:
+  db D9 18 B8 68 EF E5 05
+
+unregistersymbol(PickPwr)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1D45E686
+
+""+1D45E66C: C3                    -  ret 
+""+1D45E66D: 00 00                 -  add [eax],al
+""+1D45E66F: 00 55 8B              -  add [ebp-75],dl
+""+1D45E672: EC                    -  in al,dx
+""+1D45E673: 83 EC 08              -  sub esp,08
+""+1D45E676: B8 68 EF E5 05        -  mov eax,05E5EF68
+""+1D45E67B: D9 00                 -  fld dword ptr [eax]
+""+1D45E67D: D9 E8                 -  fld1 
+""+1D45E67F: DE E9                 -  fsubp st(1),st(0)
+""+1D45E681: B8 68 EF E5 05        -  mov eax,05E5EF68
+// ---------- INJECTING HERE ----------
+""+1D45E686: D9 18                 -  fstp dword ptr [eax]
+""+1D45E688: B8 68 EF E5 05        -  mov eax,05E5EF68
+// ---------- DONE INJECTING  ----------
+""+1D45E68D: D9 00                 -  fld dword ptr [eax]
+""+1D45E68F: D9 EE                 -  fldz 
+""+1D45E691: DF F1                 -  fcomip st(0),st(1)
+""+1D45E693: DD D8                 -  fstp st(0)
+""+1D45E695: 72 0D                 -  jb 1D45E6A4
+""+1D45E697: 83 EC 0C              -  sub esp,0C
+""+1D45E69A: 6A 06                 -  push 06
+""+1D45E69C: E8 EF E6 03 E9        -  call 0649CD90
+""+1D45E6A1: 83 C4 10              -  add esp,10
+""+1D45E6A4: C9                    -  leave 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"Block Drops"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2017-12-19
+  Author : Alpha
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//define(Blocks,GameData:AddBlockToInventory+79)
+aobscan(Blocks,03 CE 8D 45 BC) // should be unique
+alloc(newmem,$1000)
+globalalloc(BlockAmount,4)
+
+label(code)
+label(return)
+
+BlockAmount:
+  db 14
+
+newmem:
+
+code:
+//  add ecx,esi
+  add ecx,[BlockAmount]
+  lea eax,[ebp-44]
+  jmp return
+
+Blocks:
+  jmp newmem
+return:
+registersymbol(Blocks)
+
+[DISABLE]
+
+Blocks:
+  db 03 CE 8D 45 BC
+
+unregistersymbol(Blocks)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1D4A80D9
+
+""+1D4A80B6: 89 44 24 04        -  mov [esp+04],eax
+""+1D4A80BA: 8B 45 B0           -  mov eax,[ebp-50]
+""+1D4A80BD: 89 44 24 08        -  mov [esp+08],eax
+""+1D4A80C1: 8B 45 B4           -  mov eax,[ebp-4C]
+""+1D4A80C4: 89 44 24 0C        -  mov [esp+0C],eax
+""+1D4A80C8: 8B 45 B8           -  mov eax,[ebp-48]
+""+1D4A80CB: 89 44 24 10        -  mov [esp+10],eax
+""+1D4A80CF: E8 EC 7E 00 E9     -  call 064AFFC0
+""+1D4A80D4: 83 C4 20           -  add esp,20
+""+1D4A80D7: 8B C8              -  mov ecx,eax
+// ---------- INJECTING HERE ----------
+""+1D4A80D9: 03 CE              -  add ecx,esi
+""+1D4A80DB: 8D 45 BC           -  lea eax,[ebp-44]
+// ---------- DONE INJECTING  ----------
+""+1D4A80DE: 83 EC 08           -  sub esp,08
+""+1D4A80E1: 51                 -  push ecx
+""+1D4A80E2: 50                 -  push eax
+""+1D4A80E3: E8 B8 3A FC E8     -  call 0646BBA0
+""+1D4A80E8: 83 C4 0C           -  add esp,0C
+""+1D4A80EB: 8B 45 A4           -  mov eax,[ebp-5C]
+""+1D4A80EE: 8B 4D BC           -  mov ecx,[ebp-44]
+""+1D4A80F1: 89 08              -  mov [eax],ecx
+""+1D4A80F3: 8B 4D C0           -  mov ecx,[ebp-40]
+""+1D4A80F6: 89 48 04           -  mov [eax+04],ecx
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"Blocks Amount"</Description>
+          <LastState Value="20" RealAddress="08040030"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>BlockAmount</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>42</ID>
+      <Description>"Ability Cooldown"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2017-12-22
+  Author : Alpha
+
+  This script does blah blah blah
+}
+{$lua}
+LaunchMonoDataCollector()
+{$asm}
+
+define(AbilityTimer,Ability:UpdateCoolDownEvent+1c)
+define(bytes,0F 85 6D 00 00 00)
+
+[ENABLE]
+//aobscan(AbilityTimer,0F 85 6D 00 00 00 83 EC 08 68 F0) // should be unique
+assert(AbilityTimer,bytes)
+
+AbilityTimer:
+  db 90 90 90 90 90 90
+
+[DISABLE]
+
+AbilityTimer:
+  db 0F 85 6D 00 00 00
+unregistersymbol(AbilityTimer)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1BB0F9EC
+
+""+1BB0F9D0: 55                    -  push ebp
+""+1BB0F9D1: 8B EC                 -  mov ebp,esp
+""+1BB0F9D3: 57                    -  push edi
+""+1BB0F9D4: 83 EC 14              -  sub esp,14
+""+1BB0F9D7: 8B 7D 08              -  mov edi,[ebp+08]
+""+1BB0F9DA: 8B 47 74              -  mov eax,[edi+74]
+""+1BB0F9DD: 3D 01 00 00 00        -  cmp eax,00000001
+""+1BB0F9E2: 7E 0E                 -  jle Ability:UpdateCoolDownEvent+22
+""+1BB0F9E4: 8B 47 58              -  mov eax,[edi+58]
+""+1BB0F9E7: 3D 01 00 00 00        -  cmp eax,00000001
+// ---------- INJECTING HERE ----------
+""+1BB0F9EC: 0F 85 6D 00 00 00     -  jne Ability:UpdateCoolDownEvent+8f
+// ---------- DONE INJECTING  ----------
+""+1BB0F9F2: 83 EC 08              -  sub esp,08
+""+1BB0F9F5: 68 F0 A5 57 12        -  push 1257A5F0
+""+1BB0F9FA: 57                    -  push edi
+""+1BB0F9FB: E8 68 10 99 FF        -  call System:Object:__icall_wrapper_mono_ldvirtfn
+""+1BB0FA00: 83 C4 10              -  add esp,10
+""+1BB0FA03: 89 45 F4              -  mov [ebp-0C],eax
+""+1BB0FA06: 83 EC 0C              -  sub esp,0C
+""+1BB0FA09: 68 7C FD 6A 14        -  push 146AFD7C
+""+1BB0FA0E: E8 05 09 77 EA        -  call System:Object:__icall_wrapper_mono_object_new_fast
+""+1BB0FA13: 83 C4 10              -  add esp,10
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>40</ID>
+      <Description>"Instant Chest Timer (New Chests)"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2017-12-22
+  Author : Alpha
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//define(ChestTime,ChestData:StartChestTimer+54)
+aobscan(ChestTime,83 C4 10 8B 40 24 89 47) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  add esp,10
+  mov eax,#0//[eax+24]
+  jmp return
+
+ChestTime:
+  jmp newmem
+  nop
+return:
+registersymbol(ChestTime)
+
+[DISABLE]
+
+ChestTime:
+  db 83 C4 10 8B 40 24
+
+unregistersymbol(ChestTime)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 0634101C
+
+""+6340FFA: C7 47 20 02 00 00 00  -  mov [edi+20],00000002
+""+6341001: 8B 05 A0 8E C9 05     -  mov eax,[05C98EA0]
+""+6341007: 8B 40 24              -  mov eax,[eax+24]
+""+634100A: 8B 40 7C              -  mov eax,[eax+7C]
+""+634100D: 8B 4F 24              -  mov ecx,[edi+24]
+""+6341010: 83 EC 08              -  sub esp,08
+""+6341013: 51                    -  push ecx
+""+6341014: 50                    -  push eax
+""+6341015: 39 00                 -  cmp [eax],eax
+""+6341017: E8 9C 01 00 00        -  call System.Collections.Generic:Dictionary`2:get_Item
+// ---------- INJECTING HERE ----------
+""+634101C: 83 C4 10              -  add esp,10
+""+634101F: 8B 40 24              -  mov eax,[eax+24]
+// ---------- DONE INJECTING  ----------
+""+6341022: 89 47 14              -  mov [edi+14],eax
+""+6341025: 89 47 18              -  mov [edi+18],eax
+""+6341028: 85 FF                 -  test edi,edi
+""+634102A: 0F 84 3F 00 00 00     -  je ChestData:StartChestTimer+a7
+""+6341030: 83 EC 0C              -  sub esp,0C
+""+6341033: 68 7C FD 6A 14        -  push 146AFD7C
+""+6341038: E8 DB F2 F3 FF        -  call System:Object:__icall_wrapper_mono_object_new_fast
+""+634103D: 83 C4 10              -  add esp,10
+""+6341040: 89 78 10              -  mov [eax+10],edi
+""+6341043: C7 40 14 60 4C 86 12  -  mov [eax+14],12864C60
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>47</ID>
+      <Description>""Free" Items"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2017-12-22
+  Author : Alpha
+
+  This script will buy things regardless if you have the blocks for it.
+  IT WILL STILL SUBSTRACT THE BLOCKS UNTIL YOU HAVE NONE
+}
+{$lua}
+LaunchMonoDataCollector()
+{$asm}
+
+define(BuyBypass,GameData:AttemptToSpendCurrency+87)
+define(bytes,8B 46 10 3B D8)
+
+[ENABLE]
+assert(BuyBypass,bytes)
+//aobscan(BuyBypass,8B 46 10 3B D8) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov eax,0//[esi+10]
+  cmp ebx,eax
+  jmp return
+
+BuyBypass:
+  jmp newmem
+return:
+registersymbol(BuyBypass)
+
+[DISABLE]
+
+BuyBypass:
+  db 8B 46 10 3B D8
+
+unregistersymbol(BuyBypass)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1BB21017
+
+1BB20FF5: 8B 45 E0              -  mov eax,[ebp-20]
+1BB20FF8: 89 44 24 10           -  mov [esp+10],eax
+1BB20FFC: E8 AF F9 7B EA        -  call CodeStage.AntiCheat.ObscuredTypes:ObscuredInt:op_Implicit
+1BB21001: 83 C4 20              -  add esp,20
+1BB21004: 8B D8                 -  mov ebx,eax
+1BB21006: 8B 46 08              -  mov eax,[esi+08]
+1BB21009: 3D 39 00 00 00        -  cmp eax,00000039
+1BB2100E: 75 07                 -  jne GameData:AttemptToSpendCurrency+87
+1BB21010: E8 77 1F 82 EA        -  call 06342F8C
+1BB21015: 8B D8                 -  mov ebx,eax
+// ---------- INJECTING HERE ----------
+1BB21017: 8B 46 10              -  mov eax,[esi+10]
+1BB2101A: 3B D8                 -  cmp ebx,eax
+// ---------- DONE INJECTING  ----------
+1BB2101C: 7C 38                 -  jl GameData:AttemptToSpendCurrency+c6
+1BB2101E: 8B 46 08              -  mov eax,[esi+08]
+1BB21021: 3D 39 00 00 00        -  cmp eax,00000039
+1BB21026: 75 14                 -  jne GameData:AttemptToSpendCurrency+ac
+1BB21028: 8B 46 10              -  mov eax,[esi+10]
+1BB2102B: 83 EC 08              -  sub esp,08
+1BB2102E: FF 75 0C              -  push [ebp+0C]
+1BB21031: 50                    -  push eax
+1BB21032: E8 31 28 FC FF        -  call 1BAE3868
+1BB21037: 83 C4 10              -  add esp,10
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>27</ID>
+      <Description>"Runic Dust"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2017-12-20
+  Author : Alpha
+
+  This script does blah blah blah
+}
+{$lua}
+LaunchMonoDataCollector()
+{$asm}
+
+define(address,RunicDust:GetCount+38)
+define(bytes,85 C0 74 08)
+
+[ENABLE]
+assert(address,bytes)
+globalalloc(RunicAdd,4)
+
+RunicAdd:
+  readmem(address+6,4)
+
+address:
+  db 90 90 90 90
+
+[DISABLE]
+
+address:
+  db bytes
+  // test eax,eax
+  // je RunicDust:GetCount+3f
+  // mov eax,[05D5EE58]
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 064025CB
+
+064025B0: 50                 -  push eax
+064025B1: E8 22 12 FF FF     -  call RunicDust:CalcHash
+064025B6: 83 C4 10           -  add esp,10
+064025B9: 8B C8              -  mov ecx,eax
+064025BB: 8B 45 FC           -  mov eax,[ebp-04]
+064025BE: 83 EC 08           -  sub esp,08
+064025C1: 51                 -  push ecx
+064025C2: 50                 -  push eax
+064025C3: E8 00 F7 F3 FF     -  call System:String:op_Equality
+064025C8: 83 C4 10           -  add esp,10
+// ---------- INJECTING HERE ----------
+064025CB: 85 C0              -  test eax,eax
+064025CD: 74 08              -  je RunicDust:GetCount+3f
+064025CF: 8B 05 58 EE D5 05  -  mov eax,[05D5EE58]
+// ---------- DONE INJECTING  ----------
+064025D5: EB 17              -  jmp RunicDust:GetCount+56
+064025D7: 83 EC 0C           -  sub esp,0C
+064025DA: 68 F0 2A AA 18     -  push 18AA2AF0
+064025DF: E8 1C 68 86 18     -  call Analytics:LogHashFailure
+064025E4: 83 C4 10           -  add esp,10
+064025E7: E8 8C 11 FF FF     -  call RunicDust:Reset
+064025EC: 33 C0              -  xor eax,eax
+064025EE: C9                 -  leave 
+064025EF: C3                 -  ret 
+064025F0: 68 38 88 E4 14     -  push 14E48838
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>28</ID>
+          <Description>"Runic Dust"</Description>
+          <LastState Value="900718" RealAddress="05C6EE10"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>RunicAdd</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>37</ID>
+      <Description>"Artifact Dust"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2017-12-21
+  Author : Alpha
+
+  This script does blah blah blah
+}
+{$lua}
+LaunchMonoDataCollector()
+{$asm}
+
+define(address,ArtifactDust:GetCount+33)
+define(bytes,85 C0 74 08)
+
+[ENABLE]
+assert(address,bytes)
+globalalloc(AD_Add,4)
+
+AD_Add:
+  readmem(address+6,4)
+
+address:
+  db 90 90 90 90
+
+[DISABLE]
+
+address:
+  db bytes
+  // test eax,eax
+  // je ArtifactDust:GetCount+3f
+  // mov eax,[05CDEE28]
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1C5D0DAB
+
+1C5D0D90: 50                 -  push eax
+1C5D0D91: E8 02 EA DA E9     -  call ArtifactDust:CalcHash
+1C5D0D96: 83 C4 10           -  add esp,10
+1C5D0D99: 8B C8              -  mov ecx,eax
+1C5D0D9B: 8B 45 FC           -  mov eax,[ebp-04]
+1C5D0D9E: 83 EC 08           -  sub esp,08
+1C5D0DA1: 51                 -  push ecx
+1C5D0DA2: 50                 -  push eax
+1C5D0DA3: E8 20 0F CF E9     -  call System:String:op_Equality
+1C5D0DA8: 83 C4 10           -  add esp,10
+// ---------- INJECTING HERE ----------
+1C5D0DAB: 85 C0              -  test eax,eax
+1C5D0DAD: 74 08              -  je ArtifactDust:GetCount+3f
+1C5D0DAF: 8B 05 28 EE CD 05  -  mov eax,[05CDEE28]
+// ---------- DONE INJECTING  ----------
+1C5D0DB5: EB 17              -  jmp ArtifactDust:GetCount+56
+1C5D0DB7: 83 EC 0C           -  sub esp,0C
+1C5D0DBA: 68 78 9A 0A 1D     -  push 1D0A9A78
+1C5D0DBF: E8 64 19 DB E9     -  call 06382728
+1C5D0DC4: 83 C4 10           -  add esp,10
+1C5D0DC7: E8 5C E9 DA E9     -  call 0637F728
+1C5D0DCC: 33 C0              -  xor eax,eax
+1C5D0DCE: C9                 -  leave 
+1C5D0DCF: C3                 -  ret 
+1C5D0DD0: 55                 -  push ebp
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>38</ID>
+          <Description>"Artifact Dust"</Description>
+          <LastState Value="28299" RealAddress="05C6EE58"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>AD_Add</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>35</ID>
+      <Description>"Ender Pearl"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2017-12-21
+  Author : Alpha
+
+  This script does blah blah blah
+}
+{$lua}
+LaunchMonoDataCollector()
+{$asm}
+
+define(address,EnderPearls:GetCount+33)
+define(bytes,85 C0 74 08)
+
+[ENABLE]
+assert(address,bytes)
+globalalloc(EP_Add,4)
+
+EP_Add:
+  readmem(address+6,4)
+
+address:
+  db 90 90 90 90
+
+[DISABLE]
+
+address:
+  db bytes
+  // test eax,eax
+  // je EnderPearls:GetCount+3f
+  // mov eax,[05CDEE40]
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1C5D0D23
+
+1C5D0D08: 50                 -  push eax
+1C5D0D09: E8 92 58 DA E9     -  call EnderPearls:CalcHash
+1C5D0D0E: 83 C4 10           -  add esp,10
+1C5D0D11: 8B C8              -  mov ecx,eax
+1C5D0D13: 8B 45 FC           -  mov eax,[ebp-04]
+1C5D0D16: 83 EC 08           -  sub esp,08
+1C5D0D19: 51                 -  push ecx
+1C5D0D1A: 50                 -  push eax
+1C5D0D1B: E8 A8 0F CF E9     -  call System:String:op_Equality
+1C5D0D20: 83 C4 10           -  add esp,10
+// ---------- INJECTING HERE ----------
+1C5D0D23: 85 C0              -  test eax,eax
+1C5D0D25: 74 08              -  je EnderPearls:GetCount+3f
+1C5D0D27: 8B 05 40 EE CD 05  -  mov eax,[05CDEE40]
+// ---------- DONE INJECTING  ----------
+1C5D0D2D: EB 17              -  jmp EnderPearls:GetCount+56
+1C5D0D2F: 83 EC 0C           -  sub esp,0C
+1C5D0D32: 68 40 9B 0A 1D     -  push 1D0A9B40
+1C5D0D37: E8 A4 A0 09 00     -  call Analytics:LogHashFailure
+1C5D0D3C: 83 C4 10           -  add esp,10
+1C5D0D3F: E8 FC 57 DA E9     -  call EnderPearls:Reset
+1C5D0D44: 33 C0              -  xor eax,eax
+1C5D0D46: C9                 -  leave 
+1C5D0D47: C3                 -  ret 
+1C5D0D48: 55                 -  push ebp
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>36</ID>
+          <Description>"Ender Pearls"</Description>
+          <LastState Value="9038" RealAddress="05C6EE40"/>
+          <VariableType>4 Bytes</VariableType>
+          <Address>EP_Add</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>32</ID>
+      <Description>"Old"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>29</ID>
+          <Description>"Artifact Prices"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2017-12-20
+  Author : Alpha
+
+  This script does blah blah blah
+}
+{$lua}
+LaunchMonoDataCollector()
+{$asm}
+
+define(ArtUp,ArtifactController:GetUpgradeDustCost+7)
+define(ArtTrsh,ArtifactController:GetTrashDustGain+7)
+
+[ENABLE]
+//aobscan(ArtUp,8B 7D 0C 8B 45 08 8B 40 20) // should be unique
+//aobscan(ArtTrsh,8B 7D 0C 8B 45 08 8B 40 28) // should be unique
+
+alloc(newmem,$1000)
+globalalloc(ArtLvlUp,4)
+globalalloc(ArtLvlTrsh,4)
+
+label(codeUp)
+label(codeTrsh)
+label(reUp)
+label(reTrsh)
+
+ArtLvlUp:
+  db 0
+ArtLvlTrsh:
+  db 64
+
+newmem:
+codeUp:
+  mov edi,[ArtLvlUp] //change level
+  mov ecx,[ArtLvlUp] //change level
+  mov eax,[ebp+08]
+  jmp reUp
+
+codeTrsh:
+  mov edi,[ArtLvlTrsh] //change level
+  mov ecx,[ArtLvlTrsh] //change level
+  mov eax,[ebp+08]
+  jmp reTrsh
+
+
+ArtUp:
+  jmp codeUp
+  nop
+reUp:
+
+ArtTrsh:
+  jmp codeTrsh
+  nop
+reTrsh:
+
+registersymbol(ArtUp)
+registersymbol(ArtTrsh)
+
+[DISABLE]
+
+ArtUp:
+  db 8B 7D 0C 8B 45 08
+
+ArtTrsh:
+  db 8B 7D 0C 8B 45 08
+
+unregistersymbol(ArtUp)
+unregistersymbol(ArtTrsh)
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1717E327
+
+""+1717E30F: 00 68 E8           -  add [eax-18],ch
+""+1717E312: 87 4B 12           -  xchg [ebx+12],ecx
+""+1717E315: E9 0E 1D B8 EE     -  jmp 05D00028
+""+1717E31A: 00 00              -  add [eax],al
+""+1717E31C: 00 00              -  add [eax],al
+""+1717E31E: 00 00              -  add [eax],al
+""+1717E320: 55                 -  push ebp
+""+1717E321: 8B EC              -  mov ebp,esp
+""+1717E323: 57                 -  push edi
+""+1717E324: 83 EC 24           -  sub esp,24
+// ---------- INJECTING HERE ----------
+""+1717E327: 8B 7D 0C           -  mov edi,[ebp+0C]
+""+1717E32A: 8B 45 08           -  mov eax,[ebp+08]
+// ---------- DONE INJECTING  ----------
+""+1717E32D: 8B 40 20           -  mov eax,[eax+20]
+""+1717E330: 83 EC 08           -  sub esp,08
+""+1717E333: 57                 -  push edi
+""+1717E334: 50                 -  push eax
+""+1717E335: 39 00              -  cmp [eax],eax
+""+1717E337: E8 24 09 E5 04     -  call System.Collections.Generic:Dictionary`2:ContainsKey
+""+1717E33C: 83 C4 10           -  add esp,10
+""+1717E33F: 85 C0              -  test eax,eax
+""+1717E341: 0F 85 A9 00 00 00  -  jne ArtifactController:GetUpgradeDustCost+d0
+""+1717E347: 8B 05 A0 8E C5 05  -  mov eax,[05C58EA0]
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>30</ID>
+              <Description>"Artifact Upgrade Level"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>ArtLvlUp</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>31</ID>
+              <Description>"Artifact Trash Level"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>ArtLvlTrsh</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"Artifact Upgrade Level"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2017-12-20
+  Author : Alpha
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(UpgrCost,8B 7D 0C 8B 45 08 8B 40 20) // should be unique
+alloc(newmem,$1000)
+globalalloc(ArtLvlUpg,4)
+
+label(code)
+label(return)
+
+ArtLvlUpg:
+  db 0
+
+newmem:
+
+code:
+//  mov edi,[ebp+0C]
+  mov edi,[ArtLvlUpg] //change level
+  mov ecx,[ArtLvlUpg] //change level
+  mov eax,[ebp+08]
+  jmp return
+
+UpgrCost:
+  jmp newmem
+  nop
+return:
+registersymbol(UpgrCost)
+
+[DISABLE]
+
+UpgrCost:
+  db 8B 7D 0C 8B 45 08
+
+unregistersymbol(UpgrCost)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1717E327
+
+""+1717E30F: 00 68 E8           -  add [eax-18],ch
+""+1717E312: 87 4B 12           -  xchg [ebx+12],ecx
+""+1717E315: E9 0E 1D B8 EE     -  jmp 05D00028
+""+1717E31A: 00 00              -  add [eax],al
+""+1717E31C: 00 00              -  add [eax],al
+""+1717E31E: 00 00              -  add [eax],al
+""+1717E320: 55                 -  push ebp
+""+1717E321: 8B EC              -  mov ebp,esp
+""+1717E323: 57                 -  push edi
+""+1717E324: 83 EC 24           -  sub esp,24
+// ---------- INJECTING HERE ----------
+""+1717E327: 8B 7D 0C           -  mov edi,[ebp+0C]
+""+1717E32A: 8B 45 08           -  mov eax,[ebp+08]
+// ---------- DONE INJECTING  ----------
+""+1717E32D: 8B 40 20           -  mov eax,[eax+20]
+""+1717E330: 83 EC 08           -  sub esp,08
+""+1717E333: 57                 -  push edi
+""+1717E334: 50                 -  push eax
+""+1717E335: 39 00              -  cmp [eax],eax
+""+1717E337: E8 24 09 E5 04     -  call System.Collections.Generic:Dictionary`2:ContainsKey
+""+1717E33C: 83 C4 10           -  add esp,10
+""+1717E33F: 85 C0              -  test eax,eax
+""+1717E341: 0F 85 A9 00 00 00  -  jne ArtifactController:GetUpgradeDustCost+d0
+""+1717E347: 8B 05 A0 8E C5 05  -  mov eax,[05C58EA0]
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>20</ID>
+              <Description>"Artifact Level"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>ArtLvlUpg</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>21</ID>
+          <Description>"Artifact Trash Level"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2017-12-20
+  Author : Alpha
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(ArtTrsh,8B 7D 0C 8B 45 08 8B 40 28) // should be unique
+alloc(newmem,$1000)
+globalalloc(ArtLvlTrsh,4)
+
+label(code)
+label(return)
+
+ArtLvlTrsh:
+  db (int)250
+
+newmem:
+
+code:
+//  mov edi,[ebp+0C]
+  mov edi,[ArtLvlTrsh] //change level
+  mov ecx,[ArtLvlTrsh] //change level
+  mov eax,[ebp+08]
+  jmp return
+
+ArtTrsh:
+  jmp newmem
+  nop
+return:
+registersymbol(ArtTrsh)
+
+[DISABLE]
+
+ArtTrsh:
+  db 8B 7D 0C 8B 45 08
+
+unregistersymbol(ArtTrsh)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1717E6DF
+
+""+1717E6C7: 00 68 08           -  add [eax+08],ch
+""+1717E6CA: 88 4B 12           -  mov [ebx+12],cl
+""+1717E6CD: E9 56 19 B8 EE     -  jmp 05D00028
+""+1717E6D2: 00 00              -  add [eax],al
+""+1717E6D4: 00 00              -  add [eax],al
+""+1717E6D6: 00 00              -  add [eax],al
+""+1717E6D8: 55                 -  push ebp
+""+1717E6D9: 8B EC              -  mov ebp,esp
+""+1717E6DB: 57                 -  push edi
+""+1717E6DC: 83 EC 24           -  sub esp,24
+// ---------- INJECTING HERE ----------
+""+1717E6DF: 8B 7D 0C           -  mov edi,[ebp+0C]
+""+1717E6E2: 8B 45 08           -  mov eax,[ebp+08]
+// ---------- DONE INJECTING  ----------
+""+1717E6E5: 8B 40 28           -  mov eax,[eax+28]
+""+1717E6E8: 83 EC 08           -  sub esp,08
+""+1717E6EB: 57                 -  push edi
+""+1717E6EC: 50                 -  push eax
+""+1717E6ED: 39 00              -  cmp [eax],eax
+""+1717E6EF: E8 6C 05 E5 04     -  call System.Collections.Generic:Dictionary`2:ContainsKey
+""+1717E6F4: 83 C4 10           -  add esp,10
+""+1717E6F7: 85 C0              -  test eax,eax
+""+1717E6F9: 0F 85 A9 00 00 00  -  jne ArtifactController:GetTrashDustGain+d0
+""+1717E6FF: 8B 05 A0 8E C5 05  -  mov eax,[05C58EA0]
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>22</ID>
+              <Description>"Artifact Level"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>ArtLvlTrsh</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>ArtLvlUp</Name>
+      <Address>0CA40010</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>BlockAmount</Name>
+      <Address>08040030</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>ArtLvl</Name>
+      <Address>07EC0010</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>ArtLvlUpg</Name>
+      <Address>0C860020</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>ArtLvlTrsh</Name>
+      <Address>0CA40020</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>RunicAdd</Name>
+      <Address>08040000</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>EP_Add</Name>
+      <Address>08040020</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>AD_Add</Name>
+      <Address>08040010</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>
