@@ -1,0 +1,1754 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"--------------------------------------------------"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>02089E</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>26</ID>
+      <Description>"Game: PickCrafter"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>02089E</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>27</ID>
+      <Description>"Platform: Steam"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>02089E</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>28</ID>
+      <Description>"Version: nil"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>02089E</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>29</ID>
+      <Description>"Engine: Unity"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>02089E</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>30</ID>
+      <Description>"--------------------------------------------------"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>02089E</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>31</ID>
+      <Description>"Table Maker: SombreroPlayz"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>02089E</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>32</ID>
+      <Description>"Table Version: 1.0"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>02089E</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>33</ID>
+      <Description>"Credits: nil"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>02089E</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>34</ID>
+      <Description>"--------------------------------------------------"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>02089E</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"Disable AntiCheat (outdated, dont F***ING TICK IT!)"</Description>
+          <Options moHideChildren="1" moManualExpandCollapse="1"/>
+          <LastState/>
+          <Color>FFFFFF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$lua}
+if not monopipe then LaunchMonoDataCollector() end
+{$asm}
+
+[enable]
+
+FiveampCheatCore:OnValueChange:
+db C3
+
+FiveampCheatCore:OnHackingDetected:
+db C3
+
+FiveampCheatCore:CheckForCheatEngine:
+db C3
+
+FiveampCheatCore:LogEvent:
+db C3
+
+FiveampCheatCore:OnSpeedHackDetect:
+db C3
+
+FiveampCheatCore:Awake:
+db C3
+
+FiveampCheatCore:get_hackDetected:
+db C3
+{
+CodeStage.AntiCheat.Detectors:ActDetectorBase:get_IsRunning:
+db C3
+
+CodeStage.AntiCheat.Detectors:ActDetectorBase:OnCheatingDetected:
+db C3
+
+CodeStage.AntiCheat.Detectors:ActDetectorBase:OnEnable:
+db C3
+
+CodeStage.AntiCheat.Detectors:ActDetectorBase:Start:
+db C3
+
+CodeStage.AntiCheat.Detectors:ActDetectorBase:StartDetectionAutomatically:
+db C3
+}
+
+[disable]
+
+FiveampCheatCore:OnValueChange:
+db 55
+
+FiveampCheatCore:OnHackingDetected:
+db 55
+
+FiveampCheatCore:CheckForCheatEngine:
+db 55
+
+FiveampCheatCore:LogEvent:
+db 55
+
+FiveampCheatCore:OnSpeedHackDetect:
+db 55
+
+FiveampCheatCore:Awake:
+db 55
+
+FiveampCheatCore:get_hackDetected:
+db 55
+{
+CodeStage.AntiCheat.Detectors:ActDetectorBase:get_IsRunning:
+db 55
+
+CodeStage.AntiCheat.Detectors:ActDetectorBase:OnCheatingDetected:
+db 55
+
+CodeStage.AntiCheat.Detectors:ActDetectorBase:OnEnable:
+db 55
+
+CodeStage.AntiCheat.Detectors:ActDetectorBase:Start:
+db 55
+
+CodeStage.AntiCheat.Detectors:ActDetectorBase:StartDetectionAutomatically:
+db 55
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>2</ID>
+              <Description>"Pick Value Modifier"</Description>
+              <Options moHideChildren="1" moManualExpandCollapse="1"/>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2020-09-07
+  Author : maxie
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanregion(currentpick,GameData:EarnPicks,GameData:EarnPicks+50,DD 18 DD 45 08) // should be unique
+alloc(newmem,$100,currentpick)
+
+label(code)
+label(return)
+registersymbol(pickbase)
+
+newmem:
+
+code:
+  fld qword ptr [pickbase]
+  fstp qword ptr [eax]
+  fld qword ptr [ebp+08]
+  jmp return
+
+pickbase:
+dq (double)1000
+
+currentpick:
+  jmp newmem
+return:
+registersymbol(currentpick)
+
+[DISABLE]
+
+currentpick:
+  db DD 18 DD 45 08
+
+unregistersymbol(pickbase)
+unregistersymbol(currentpick)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 061FFCB8
+
+061FFC99: 73 35              -  jae 061FFCD0
+061FFC9B: B8 60 B4 78 14     -  mov eax,1478B460
+061FFCA0: DD 00              -  fld qword ptr [eax]
+061FFCA2: DD 5D F8           -  fstp qword ptr [ebp-08]
+061FFCA5: DD 45 F8           -  fld qword ptr [ebp-08]
+061FFCA8: DD 45 08           -  fld qword ptr [ebp+08]
+061FFCAB: DE C1              -  faddp 
+061FFCAD: DD 5D F8           -  fstp qword ptr [ebp-08]
+061FFCB0: DD 45 F8           -  fld qword ptr [ebp-08]
+061FFCB3: B8 60 B4 78 14     -  mov eax,1478B460
+// ---------- INJECTING HERE ----------
+061FFCB8: DD 18              -  fstp qword ptr [eax]
+061FFCBA: DD 45 08           -  fld qword ptr [ebp+08]
+// ---------- DONE INJECTING  ----------
+061FFCBD: 83 EC 04           -  sub esp,04
+061FFCC0: 83 EC 08           -  sub esp,08
+061FFCC3: DD 1C 24           -  fstp qword ptr [esp]
+061FFCC6: 6A 00              -  push 00
+061FFCC8: E8 33 D3 E0 10     -  call 1700D000
+061FFCCD: 83 C4 10           -  add esp,10
+061FFCD0: C9                 -  leave 
+061FFCD1: C3                 -  ret 
+061FFCD2: 00 00              -  add [eax],al
+061FFCD4: 68 F0 98 BF 17     -  push 17BF98F0
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3</ID>
+                  <Description>"Current Picks (default 1000)"</Description>
+                  <VariableType>Double</VariableType>
+                  <Address>pickbase</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>14</ID>
+              <Description>"Always Critical Hit"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+Damage:IsCritHit:
+mov al,1
+ret
+
+[disable]
+Damage:IsCritHit:
+push ebp
+mov ebp,esp
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>4</ID>
+              <Description>"No Picks Decrease"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+GameData:SpendPicks:
+db C3 // ret
+
+[disable]
+GameData:SpendPicks:
+db 55 // push rbp
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>12</ID>
+              <Description>"No Runic Requirement/Purchase Decrease [Buying Chest]"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2020-09-07
+  Author : maxie
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanregion(norunicreq,RunicDust:GetCount,RunicDust:GetCount+200,74 0B 8B 05 10 ?? ?? ??) // should be unique
+norunicreq:
+  db 90 90
+registersymbol(norunicreq)
+
+RunicDust:_spend:
+  db C3
+
+[DISABLE]
+
+norunicreq:
+  db 74 0B
+unregistersymbol(norunicreq)
+
+RunicDust:_spend:
+  db 55
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1DB9B6AE
+
+1DB9B692: E8 31 F9 36 E8     -  call 05F0AFC8
+1DB9B697: 83 C4 10           -  add esp,10
+1DB9B69A: 8B C8              -  mov ecx,eax
+1DB9B69C: 8B 45 F8           -  mov eax,[ebp-08]
+1DB9B69F: 83 EC 08           -  sub esp,08
+1DB9B6A2: 51                 -  push ecx
+1DB9B6A3: 50                 -  push eax
+1DB9B6A4: E8 6F 66 27 E8     -  call 05E11D18
+1DB9B6A9: 83 C4 10           -  add esp,10
+1DB9B6AC: 85 C0              -  test eax,eax
+// ---------- INJECTING HERE ----------
+1DB9B6AE: 74 0B              -  je 1DB9B6BB
+1DB9B6B0: 8B 05 10 EE 91 05  -  mov eax,[0591EE10]
+// ---------- DONE INJECTING  ----------
+1DB9B6B6: E9 56 00 00 00     -  jmp 1DB9B711
+1DB9B6BB: 83 EC 0C           -  sub esp,0C
+1DB9B6BE: 68 8C C6 E3 17     -  push 17E3C68C
+1DB9B6C3: E8 50 4C 27 E8     -  call 05E10318
+1DB9B6C8: 83 C4 10           -  add esp,10
+1DB9B6CB: 83 EC 0C           -  sub esp,0C
+1DB9B6CE: 89 45 F8           -  mov [ebp-08],eax
+1DB9B6D1: 50                 -  push eax
+1DB9B6D2: E8 69 A6 28 E8     -  call 05E25D40
+1DB9B6D7: 83 C4 10           -  add esp,10
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>20</ID>
+              <Description>"Zero Pick Power Cooldown"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2020-09-08
+  Author : maxie
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanregion(zeropowercooldown,PickaxePowerController:UpdateCoolDownEvent,PickaxePowerController:UpdateCoolDownEvent+50, D9 00 D9 E8 DE E9 B8 B8) // should be unique
+alloc(newmem,$100,zeropowercooldown)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov dword ptr [eax],(float)0
+  fld dword ptr [eax]
+  fld1 
+  fsubp st(1),st(0)
+  jmp return
+
+zeropowercooldown:
+  jmp newmem
+  nop
+return:
+registersymbol(zeropowercooldown)
+
+[DISABLE]
+
+zeropowercooldown:
+  db D9 00 D9 E8 DE E9
+
+unregistersymbol(zeropowercooldown)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1DE8AEBB
+
+1DE8AEA3: DE C1              -  faddp 
+1DE8AEA5: D9 5D F8           -  fstp dword ptr [ebp-08]
+1DE8AEA8: D9 45 F8           -  fld dword ptr [ebp-08]
+1DE8AEAB: C9                 -  leave 
+1DE8AEAC: C3                 -  ret 
+1DE8AEAD: 00 00              -  add [eax],al
+1DE8AEAF: 00 55 8B           -  add [ebp-75],dl
+1DE8AEB2: EC                 -  in al,dx
+1DE8AEB3: 83 EC 08           -  sub esp,08
+1DE8AEB6: B8 B8 2E 66 13     -  mov eax,13662EB8
+// ---------- INJECTING HERE ----------
+1DE8AEBB: D9 00              -  fld dword ptr [eax]
+1DE8AEBD: D9 E8              -  fld1 
+1DE8AEBF: DE E9              -  fsubp st(1),st(0)
+// ---------- DONE INJECTING  ----------
+1DE8AEC1: B8 B8 2E 66 13     -  mov eax,13662EB8
+1DE8AEC6: D9 18              -  fstp dword ptr [eax]
+1DE8AEC8: B8 B8 2E 66 13     -  mov eax,13662EB8
+1DE8AECD: D9 00              -  fld dword ptr [eax]
+1DE8AECF: D9 EE              -  fldz 
+1DE8AED1: DF F1              -  fcomip st(0),st(1)
+1DE8AED3: DD D8              -  fstp st(0)
+1DE8AED5: 72 0D              -  jb 1DE8AEE4
+1DE8AED7: 83 EC 0C           -  sub esp,0C
+1DE8AEDA: 6A 06              -  push 06
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>24</ID>
+              <Description>"Infinite Pick Boost (Get Boost First) (Read Table Extras)"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2020-09-08
+  Author : maxie
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanregion(infpickboost,PickaxePowerController:UpdateDurationEvent,PickaxePowerController:UpdateDurationEvent+40, 00 D9 E8 DE E9 B8 ?? ?? ?? ??) //DE E9 B8 C4 2E 66 13) // should be unique
+registersymbol(infpickboost)
+
+infpickboost+03:
+  db 90 90  // nop 2
+
+[DISABLE]
+
+infpickboost+03:
+  db DE E9  // fsubp st(1),st(0)
+
+unregistersymbol(infpickboost)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1DE8A277
+
+1DE8A260: 83 C4 04           -  add esp,04
+1DE8A263: C9                 -  leave 
+1DE8A264: C3                 -  ret 
+1DE8A265: 00 00              -  add [eax],al
+1DE8A267: 00 55 8B           -  add [ebp-75],dl
+1DE8A26A: EC                 -  in al,dx
+1DE8A26B: 83 EC 08           -  sub esp,08
+1DE8A26E: B8 C4 2E 66 13     -  mov eax,13662EC4
+1DE8A273: D9 00              -  fld dword ptr [eax]
+1DE8A275: D9 E8              -  fld1 
+// ---------- INJECTING HERE ----------
+1DE8A277: DE E9              -  fsubp st(1),st(0)
+1DE8A279: B8 C4 2E 66 13     -  mov eax,13662EC4
+// ---------- DONE INJECTING  ----------
+1DE8A27E: D9 18              -  fstp dword ptr [eax]
+1DE8A280: B8 C4 2E 66 13     -  mov eax,13662EC4
+1DE8A285: D9 00              -  fld dword ptr [eax]
+1DE8A287: D9 EE              -  fldz 
+1DE8A289: DF F1              -  fcomip st(0),st(1)
+1DE8A28B: DD D8              -  fstp st(0)
+1DE8A28D: 72 0D              -  jb 1DE8A29C
+1DE8A28F: 83 EC 0C           -  sub esp,0C
+1DE8A292: 6A 04              -  push 04
+1DE8A294: E8 BF 2A FC FF     -  call 1DE4CD58
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>36</ID>
+              <Description>"Runic Adder"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{$LUA}
+
+if syntaxcheck then return end
+
+if not monopipe then LaunchMonoDataCollector() end
+
+local method = mono_findMethod ( "" , "IAPController" , "AwardRunicFromIAP" )
+local c = mono_method_getClass ( method )
+local instances = mono_class_findInstancesOfClassListOnly ( "" , c )
+
+function multtest(arg1)
+   for i=0,#instances do
+   mono_invoke_method('',method,instances[i],{{type=vtDword,value=arg1}})
+   --print('executed')
+   end
+end
+
+local caption,message,defaultvalue = "Input Value","How much?",0
+local input = inputQuery(caption,message,defaultvalue)
+if input ~= nil and 0 then
+   multtest(input)
+end
+
+
+{$ASM}
+[enable]
+nop
+[disable]
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>37</ID>
+      <Description>"Alternate AntiCheat Disabler"</Description>
+      <Options moHideChildren="1" moManualExpandCollapse="1" moDeactivateChildrenAsWell="1" moAllowManualCollapseAndExpand="1"/>
+      <LastState/>
+      <Color>800080</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ 
+  Game Executable   : PickCrafter.exe
+  Executable Version: 2018.4.21.14613
+  Module Version    : 
+  Script Date       : 2021-01-28
+
+  Compatible with versions above Cheat Engine 7.2.
+}
+
+{$lua}
+if syntaxcheck then return end
+
+if (getCEVersion() &lt; 7.2) then
+  showMessage("This script is not compatible below Cheat Engine 7.2.\nPlease use the versions equal to or above it.")
+  error()
+end
+
+if not monopipe then LaunchMonoDataCollector() end
+
+{$asm}
+
+[ENABLE]
+
+aobscanregion(aob_fiveampAC1,FiveampCheatCore:get_hackDetected,FiveampCheatCore:get_hackDetected+100,55 8B EC 83 EC ??)
+aobscanregion(aob_fiveampAC2,FiveampCheatCore:OnValueChange,FiveampCheatCore:OnValueChange+100,55 8B EC 83 EC ??)
+aobscanregion(aob_fiveampAC3,FiveampCheatCore:OnHackingDetected,FiveampCheatCore:OnHackingDetected+100,55 8B EC 83 EC ??)
+aobscanregion(aob_fiveampAC4,FiveampCheatCore:CheckForCheatEngine,FiveampCheatCore:CheckForCheatEngine+100,55 8B EC 53 57 56)
+aobscanregion(aob_fiveampAC5,FiveampCheatCore:LogEvent,FiveampCheatCore:LogEvent+100,55 8B EC 83 EC ??)
+aobscanregion(aob_fiveampAC6,FiveampCheatCore:OnSpeedHackDetect,FiveampCheatCore:OnSpeedHackDetect+100,55 8B EC 83 EC ??)
+
+aobscanregion(aob_cheatScrAC1,CheatDetectedScreen:Update,CheatDetectedScreen:Update+100,55 8B EC 83 EC ??)
+aobscanregion(aob_cheatScrAC2,CheatDetectedScreen:ShutdownGame,CheatDetectedScreen:ShutdownGame+100,55 8B EC 83 EC ??)
+
+aobscanregion(aob_codeStageAC1,CodeStage.AntiCheat.Detectors:ActDetectorBase:get_IsRunning,CodeStage.AntiCheat.Detectors:ActDetectorBase:get_IsRunning+100,55 8B EC 83 EC ??)
+aobscanregion(aob_codeStageAC2,CodeStage.AntiCheat.Detectors:ActDetectorBase:OnCheatingDetected,CodeStage.AntiCheat.Detectors:ActDetectorBase:OnCheatingDetected+100,55 8B EC 57 83 EC ??)
+
+registersymbol(aob_fiveampAC1,aob_fiveampAC2,aob_fiveampAC3,aob_fiveampAC4,aob_fiveampAC5,aob_fiveampAC6)
+registersymbol(aob_cheatScrAC1,aob_cheatScrAC2)
+registersymbol(aob_codeStageAC1)
+
+///
+
+aob_fiveampAC1:
+  db C3
+
+aob_fiveampAC2:
+  db C3
+
+aob_fiveampAC3:
+  db C3
+
+aob_fiveampAC4:
+  db C3
+
+aob_fiveampAC5:
+  db C3
+
+aob_fiveampAC6:
+  db C3
+
+///
+
+aob_cheatScrAC1:
+  db C3
+
+aob_cheatScrAC2:
+  db C3
+
+///
+
+aob_codeStageAC1:
+  db C3
+
+[DISABLE]
+aob_fiveampAC1:
+  db 55
+
+aob_fiveampAC2:
+  db 55
+
+aob_fiveampAC3:
+  db 55
+
+aob_fiveampAC4:
+  db 55
+
+aob_fiveampAC5:
+  db 55
+
+aob_fiveampAC6:
+  db 55
+
+///
+
+aob_cheatScrAC1:
+  db 55
+
+aob_cheatScrAC2:
+  db 55
+
+///
+
+aob_codeStageAC1:
+  db 55
+
+aob_codeStageAC2:
+  db 55
+
+unregistersymbol(*)
+
+{$LUA}
+--if monopipe then monopipe.Destroy();monopipe = nil end
+{$ASM}
+{
+// ORIGINAL CODE - INJECTION POINT: CodeStage.AntiCheat.Detectors:ActDetectorBase:get_IsRunning
+
+UnityEngine:GameObject:get_tag+62: E8 F1 79 E4 E9  - call 05A90308
+UnityEngine:GameObject:get_tag+67: EB D1           - jmp UnityEngine:GameObject:get_tag+3a
+1BC48919: 00 00           - add [eax],al
+1BC4891B: 00 00           - add [eax],al
+1BC4891D: 00 00           - add [eax],al
+1BC4891F: 00 55 8B        - add [ebp-75],dl
+GenericHelper:OnDisable+2: EC              - in al,dx
+GenericHelper:OnDisable+3: 83 EC 08        - sub esp,08
+GenericHelper:OnDisable+6: 8B 45 08        - mov eax,[ebp+08]
+GenericHelper:OnDisable+9: 8B 40 18        - mov eax,[eax+18]
+GenericHelper:OnDisable+c: 83 EC 0C        - sub esp,0C
+GenericHelper:OnDisable+f: 50              - push eax
+GenericHelper:OnDisable+10: 39 00           - cmp [eax],eax
+GenericHelper:OnDisable+12: E8 C1 8B C4 FD  - call UnityEngine.Events:UnityEvent:Invoke
+GenericHelper:OnDisable+17: 83 C4 10        - add esp,10
+GenericHelper:OnDisable+1a: C9              - leave 
+GenericHelper:OnDisable+1b: C3              - ret 
+1BC4893C: 00 00           - add [eax],al
+1BC4893E: 00 00           - add [eax],al
+CodeStage.AntiCheat.Detectors:ActDetectorBase:get_IsRunning: 55              - push ebp
+// ---------- INJECTING HERE ----------
+CodeStage.AntiCheat.Detectors:ActDetectorBase:get_IsRunning+1: 8B EC           - mov ebp,esp
+// ---------- DONE INJECTING  ----------
+CodeStage.AntiCheat.Detectors:ActDetectorBase:get_IsRunning+3: 83 EC 08        - sub esp,08
+CodeStage.AntiCheat.Detectors:ActDetectorBase:get_IsRunning+6: 8B 45 08        - mov eax,[ebp+08]
+CodeStage.AntiCheat.Detectors:ActDetectorBase:get_IsRunning+9: 0F B6 40 19     - movzx eax,byte ptr [eax+19]
+CodeStage.AntiCheat.Detectors:ActDetectorBase:get_IsRunning+d: C9              - leave 
+CodeStage.AntiCheat.Detectors:ActDetectorBase:get_IsRunning+e: C3              - ret 
+1BC4894F: 00 55 8B        - add [ebp-75],dl
+UnityEngine.EventSystems:PointerInputModule:DeselectIfSelectionChanged+2: EC              - in al,dx
+UnityEngine.EventSystems:PointerInputModule:DeselectIfSelectionChanged+3: 83 EC 08        - sub esp,08
+UnityEngine.EventSystems:PointerInputModule:DeselectIfSelectionChanged+6: BA 50 6A 6E 15  - mov edx,156E6A50
+UnityEngine.EventSystems:PointerInputModule:DeselectIfSelectionChanged+b: 83 EC 0C        - sub esp,0C
+UnityEngine.EventSystems:PointerInputModule:DeselectIfSelectionChanged+e: FF 75 0C        - push [ebp+0C]
+UnityEngine.EventSystems:PointerInputModule:DeselectIfSelectionChanged+11: E8 6A 00 00 00  - call UnityEngine.EventSystems:ExecuteEvents:GetEventHandler
+UnityEngine.EventSystems:PointerInputModule:DeselectIfSelectionChanged+16: 83 C4 10        - add esp,10
+UnityEngine.EventSystems:PointerInputModule:DeselectIfSelectionChanged+19: 89 45 FC        - mov [ebp-04],eax
+UnityEngine.EventSystems:PointerInputModule:DeselectIfSelectionChanged+1c: 83 EC 0C        - sub esp,0C
+UnityEngine.EventSystems:PointerInputModule:DeselectIfSelectionChanged+1f: FF 75 08        - push [ebp+08]
+UnityEngine.EventSystems:PointerInputModule:DeselectIfSelectionChanged+22: E8 09 89 BD FD  - call UnityEngine.EventSystems:BaseInputModule:get_eventSystem
+UnityEngine.EventSystems:PointerInputModule:DeselectIfSelectionChanged+27: 83 C4 10        - add esp,10
+UnityEngine.EventSystems:PointerInputModule:DeselectIfSelectionChanged+2a: 83 EC 0C        - sub esp,0C
+UnityEngine.EventSystems:PointerInputModule:DeselectIfSelectionChanged+2d: 50              - push eax
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>57</ID>
+          <Description>"Pick Value Modifier"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <Color>800080</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2020-09-07
+  Author : sombreroplayz
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanregion(currentpick,GameData:EarnPicks,GameData:EarnPicks+50,DD 18 DD 45 08) // should be unique
+alloc(newmem,$100,currentpick)
+
+label(code)
+label(return)
+registersymbol(pickbase)
+
+newmem:
+
+code:
+  fld qword ptr [pickbase]
+  fstp qword ptr [eax]
+  fld qword ptr [ebp+08]
+  jmp return
+
+pickbase:
+dq (double)1000
+
+currentpick:
+  jmp newmem
+return:
+registersymbol(currentpick)
+
+[DISABLE]
+
+currentpick:
+  db DD 18 DD 45 08
+
+unregistersymbol(pickbase)
+unregistersymbol(currentpick)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 061FFCB8
+
+061FFC99: 73 35              -  jae 061FFCD0
+061FFC9B: B8 60 B4 78 14     -  mov eax,1478B460
+061FFCA0: DD 00              -  fld qword ptr [eax]
+061FFCA2: DD 5D F8           -  fstp qword ptr [ebp-08]
+061FFCA5: DD 45 F8           -  fld qword ptr [ebp-08]
+061FFCA8: DD 45 08           -  fld qword ptr [ebp+08]
+061FFCAB: DE C1              -  faddp 
+061FFCAD: DD 5D F8           -  fstp qword ptr [ebp-08]
+061FFCB0: DD 45 F8           -  fld qword ptr [ebp-08]
+061FFCB3: B8 60 B4 78 14     -  mov eax,1478B460
+// ---------- INJECTING HERE ----------
+061FFCB8: DD 18              -  fstp qword ptr [eax]
+061FFCBA: DD 45 08           -  fld qword ptr [ebp+08]
+// ---------- DONE INJECTING  ----------
+061FFCBD: 83 EC 04           -  sub esp,04
+061FFCC0: 83 EC 08           -  sub esp,08
+061FFCC3: DD 1C 24           -  fstp qword ptr [esp]
+061FFCC6: 6A 00              -  push 00
+061FFCC8: E8 33 D3 E0 10     -  call 1700D000
+061FFCCD: 83 C4 10           -  add esp,10
+061FFCD0: C9                 -  leave 
+061FFCD1: C3                 -  ret 
+061FFCD2: 00 00              -  add [eax],al
+061FFCD4: 68 F0 98 BF 17     -  push 17BF98F0
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>58</ID>
+              <Description>"Current Picks (default 1000)"</Description>
+              <VariableType>Double</VariableType>
+              <Address>pickbase</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>40</ID>
+          <Description>"Always Critical Hit"</Description>
+          <LastState/>
+          <Color>800080</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[enable]
+Damage:IsCritHit:
+mov al,1
+ret
+
+[disable]
+Damage:IsCritHit:
+push ebp
+mov ebp,esp
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>61</ID>
+          <Description>""Free" Items"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2017-12-22
+  Author : Alpha
+
+  This script will buy things regardless if you have the blocks for it.
+  IT WILL STILL SUBSTRACT THE BLOCKS UNTIL YOU HAVE NONE
+}
+{$lua}
+LaunchMonoDataCollector()
+{$asm}
+
+define(BuyBypass,GameData:AttemptToSpendCurrency+87)
+define(bytes,8B 46 10 3B D8)
+
+[ENABLE]
+assert(BuyBypass,bytes)
+//aobscan(BuyBypass,8B 46 10 3B D8) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov eax,0//[esi+10]
+  cmp ebx,eax
+  jmp return
+
+BuyBypass:
+  jmp newmem
+return:
+registersymbol(BuyBypass)
+
+[DISABLE]
+
+BuyBypass:
+  db 8B 46 10 3B D8
+
+unregistersymbol(BuyBypass)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1BB21017
+
+1BB20FF5: 8B 45 E0              -  mov eax,[ebp-20]
+1BB20FF8: 89 44 24 10           -  mov [esp+10],eax
+1BB20FFC: E8 AF F9 7B EA        -  call CodeStage.AntiCheat.ObscuredTypes:ObscuredInt:op_Implicit
+1BB21001: 83 C4 20              -  add esp,20
+1BB21004: 8B D8                 -  mov ebx,eax
+1BB21006: 8B 46 08              -  mov eax,[esi+08]
+1BB21009: 3D 39 00 00 00        -  cmp eax,00000039
+1BB2100E: 75 07                 -  jne GameData:AttemptToSpendCurrency+87
+1BB21010: E8 77 1F 82 EA        -  call 06342F8C
+1BB21015: 8B D8                 -  mov ebx,eax
+// ---------- INJECTING HERE ----------
+1BB21017: 8B 46 10              -  mov eax,[esi+10]
+1BB2101A: 3B D8                 -  cmp ebx,eax
+// ---------- DONE INJECTING  ----------
+1BB2101C: 7C 38                 -  jl GameData:AttemptToSpendCurrency+c6
+1BB2101E: 8B 46 08              -  mov eax,[esi+08]
+1BB21021: 3D 39 00 00 00        -  cmp eax,00000039
+1BB21026: 75 14                 -  jne GameData:AttemptToSpendCurrency+ac
+1BB21028: 8B 46 10              -  mov eax,[esi+10]
+1BB2102B: 83 EC 08              -  sub esp,08
+1BB2102E: FF 75 0C              -  push [ebp+0C]
+1BB21031: 50                    -  push eax
+1BB21032: E8 31 28 FC FF        -  call 1BAE3868
+1BB21037: 83 C4 10              -  add esp,10
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>46</ID>
+          <Description>"Chest Grants Runic"</Description>
+          <LastState/>
+          <Color>800080</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[enable]
+aobscanregion(aob_chestGrantRunic,ChestController:CanGrantRunic,ChestController:CanGrantRunic+1000,74xxxxxxxx74xxxxxxxx74xxxxxxxx75xxxxxxxxxxxxeb)
+registersymbol(aob_chestGrantRunic)
+
+aob_chestGrantRunic:
+  db EB
+
+[disable]
+
+aob_chestGrantRunic:
+  db 74
+
+unregistersymbol(aob_chestGrantRunic)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>41</ID>
+          <Description>"No Picks Decrease"</Description>
+          <LastState/>
+          <Color>800080</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[enable]
+GameData:SpendPicks:
+db C3 // ret
+
+[disable]
+GameData:SpendPicks:
+db 55 // push rbp
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>42</ID>
+          <Description>"No Runic Requirement/Purchase Decrease [Buying Chest]"</Description>
+          <LastState/>
+          <Color>800080</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2020-09-07
+  Author : sombreroplayz
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanregion(norunicreq,RunicDust:GetCount,RunicDust:GetCount+200,74 0B 8B 05 ?? ?? ?? ?? E9) // should be unique
+norunicreq:
+  db 90 90
+registersymbol(norunicreq)
+
+RunicDust:_spend:
+  db C3
+
+[DISABLE]
+
+norunicreq:
+  db 74 0B
+unregistersymbol(norunicreq)
+
+RunicDust:_spend:
+  db 55
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1DB9B6AE
+
+1DB9B692: E8 31 F9 36 E8     -  call 05F0AFC8
+1DB9B697: 83 C4 10           -  add esp,10
+1DB9B69A: 8B C8              -  mov ecx,eax
+1DB9B69C: 8B 45 F8           -  mov eax,[ebp-08]
+1DB9B69F: 83 EC 08           -  sub esp,08
+1DB9B6A2: 51                 -  push ecx
+1DB9B6A3: 50                 -  push eax
+1DB9B6A4: E8 6F 66 27 E8     -  call 05E11D18
+1DB9B6A9: 83 C4 10           -  add esp,10
+1DB9B6AC: 85 C0              -  test eax,eax
+// ---------- INJECTING HERE ----------
+1DB9B6AE: 74 0B              -  je 1DB9B6BB
+1DB9B6B0: 8B 05 10 EE 91 05  -  mov eax,[0591EE10]
+// ---------- DONE INJECTING  ----------
+1DB9B6B6: E9 56 00 00 00     -  jmp 1DB9B711
+1DB9B6BB: 83 EC 0C           -  sub esp,0C
+1DB9B6BE: 68 8C C6 E3 17     -  push 17E3C68C
+1DB9B6C3: E8 50 4C 27 E8     -  call 05E10318
+1DB9B6C8: 83 C4 10           -  add esp,10
+1DB9B6CB: 83 EC 0C           -  sub esp,0C
+1DB9B6CE: 89 45 F8           -  mov [ebp-08],eax
+1DB9B6D1: 50                 -  push eax
+1DB9B6D2: E8 69 A6 28 E8     -  call 05E25D40
+1DB9B6D7: 83 C4 10           -  add esp,10
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>43</ID>
+          <Description>"Zero Pick Power Cooldown"</Description>
+          <LastState/>
+          <Color>800080</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2020-09-08
+  Author : sombreroplayz
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanregion(zeropowercooldown,PickaxePowerController:UpdateCoolDownEvent,PickaxePowerController:UpdateCoolDownEvent+50, D9 00 D9 E8 DE E9 B8 B8) // should be unique
+alloc(newmem,$100,zeropowercooldown)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov dword ptr [eax],(float)0
+  fld dword ptr [eax]
+  fld1 
+  fsubp st(1),st(0)
+  jmp return
+
+zeropowercooldown:
+  jmp newmem
+  nop
+return:
+registersymbol(zeropowercooldown)
+
+[DISABLE]
+
+zeropowercooldown:
+  db D9 00 D9 E8 DE E9
+
+unregistersymbol(zeropowercooldown)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1DE8AEBB
+
+1DE8AEA3: DE C1              -  faddp 
+1DE8AEA5: D9 5D F8           -  fstp dword ptr [ebp-08]
+1DE8AEA8: D9 45 F8           -  fld dword ptr [ebp-08]
+1DE8AEAB: C9                 -  leave 
+1DE8AEAC: C3                 -  ret 
+1DE8AEAD: 00 00              -  add [eax],al
+1DE8AEAF: 00 55 8B           -  add [ebp-75],dl
+1DE8AEB2: EC                 -  in al,dx
+1DE8AEB3: 83 EC 08           -  sub esp,08
+1DE8AEB6: B8 B8 2E 66 13     -  mov eax,13662EB8
+// ---------- INJECTING HERE ----------
+1DE8AEBB: D9 00              -  fld dword ptr [eax]
+1DE8AEBD: D9 E8              -  fld1 
+1DE8AEBF: DE E9              -  fsubp st(1),st(0)
+// ---------- DONE INJECTING  ----------
+1DE8AEC1: B8 B8 2E 66 13     -  mov eax,13662EB8
+1DE8AEC6: D9 18              -  fstp dword ptr [eax]
+1DE8AEC8: B8 B8 2E 66 13     -  mov eax,13662EB8
+1DE8AECD: D9 00              -  fld dword ptr [eax]
+1DE8AECF: D9 EE              -  fldz 
+1DE8AED1: DF F1              -  fcomip st(0),st(1)
+1DE8AED3: DD D8              -  fstp st(0)
+1DE8AED5: 72 0D              -  jb 1DE8AEE4
+1DE8AED7: 83 EC 0C           -  sub esp,0C
+1DE8AEDA: 6A 06              -  push 06
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>54</ID>
+          <Description>"Runic Dust Adder"</Description>
+          <LastState/>
+          <Color>800080</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$LUA}
+
+if syntaxcheck then return end
+
+if not monopipe then LaunchMonoDataCollector() end
+
+local method = mono_findMethod ( "" , "RunicDust" , "_award" )
+local c = mono_method_getClass ( method )
+local instances = mono_class_findInstancesOfClassListOnly ( "" , c )
+
+function calltest(arg1)
+  --for i=0,#instances do
+      mono_invoke_method("",method,instances[0],{ {type=vtDword , value=arg1} })
+  --end
+end
+
+local caption,message,defaultvalue = "Input Value","How much?",0
+local input = inputQuery(caption,message,defaultvalue)
+if input ~= nil and 0 then
+   calltest(input)
+end
+
+{$ASM}
+[enable]
+nop
+[disable]
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>44</ID>
+          <Description>"Infinite Pick Boost (Get Boost First) (Read Table Extras)"</Description>
+          <LastState/>
+          <Color>800080</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : PickCrafter.exe
+  Version: 
+  Date   : 2020-09-08
+  Author : sombreroplayz
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanregion(infpickboost,PickaxePowerController:UpdateDurationEvent,PickaxePowerController:UpdateDurationEvent+40, 00 D9 E8 DE E9 B8 ?? ?? ?? ??) //DE E9 B8 C4 2E 66 13) // should be unique
+registersymbol(infpickboost)
+
+infpickboost+03:
+  db 90 90  // nop 2
+
+[DISABLE]
+
+infpickboost+03:
+  db DE E9  // fsubp st(1),st(0)
+
+unregistersymbol(infpickboost)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 1DE8A277
+
+1DE8A260: 83 C4 04           -  add esp,04
+1DE8A263: C9                 -  leave 
+1DE8A264: C3                 -  ret 
+1DE8A265: 00 00              -  add [eax],al
+1DE8A267: 00 55 8B           -  add [ebp-75],dl
+1DE8A26A: EC                 -  in al,dx
+1DE8A26B: 83 EC 08           -  sub esp,08
+1DE8A26E: B8 C4 2E 66 13     -  mov eax,13662EC4
+1DE8A273: D9 00              -  fld dword ptr [eax]
+1DE8A275: D9 E8              -  fld1 
+// ---------- INJECTING HERE ----------
+1DE8A277: DE E9              -  fsubp st(1),st(0)
+1DE8A279: B8 C4 2E 66 13     -  mov eax,13662EC4
+// ---------- DONE INJECTING  ----------
+1DE8A27E: D9 18              -  fstp dword ptr [eax]
+1DE8A280: B8 C4 2E 66 13     -  mov eax,13662EC4
+1DE8A285: D9 00              -  fld dword ptr [eax]
+1DE8A287: D9 EE              -  fldz 
+1DE8A289: DF F1              -  fcomip st(0),st(1)
+1DE8A28B: DD D8              -  fstp st(0)
+1DE8A28D: 72 0D              -  jb 1DE8A29C
+1DE8A28F: 83 EC 0C           -  sub esp,0C
+1DE8A292: 6A 04              -  push 04
+1DE8A294: E8 BF 2A FC FF     -  call 1DE4CD58
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>55</ID>
+          <Description>"Ender Pearls Adder"</Description>
+          <LastState/>
+          <Color>800080</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$LUA}
+
+if syntaxcheck then return end
+
+if not monopipe then LaunchMonoDataCollector() end
+
+local method = mono_findMethod ( "" , "EnderPearls" , "_award" )
+local c = mono_method_getClass ( method )
+local instances = mono_class_findInstancesOfClassListOnly ( "" , c )
+
+function calltest(arg1)
+  for i=0,#instances do
+      mono_invoke_method("",method,instances[i],{ {type=vtDword , value=arg1} })
+  end
+end
+
+local caption,message,defaultvalue = "Input Value","How much?",0
+local input = inputQuery(caption,message,defaultvalue)
+if input ~= nil and 0 then
+   calltest(input)
+end
+
+{$ASM}
+[enable]
+nop
+[disable]
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>56</ID>
+          <Description>"Artifact Dust Adder (not working)"</Description>
+          <LastState/>
+          <Color>FF8080</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{$LUA}
+
+if syntaxcheck then return end
+
+if not monopipe then LaunchMonoDataCollector() end
+
+local method = mono_findMethod ( "" , "ArtifactDust" , "_award" )
+local c = mono_method_getClass ( method )
+local instances = mono_class_findInstancesOfClassListOnly ( "" , c )
+
+function calltest(arg1)
+  --for i=0,#instances do
+      mono_invoke_method("",method,instances[0],{ {type=vtDword , value=arg1} })
+  --end
+end
+
+local caption,message,defaultvalue = "Input Value","How much?",0
+local input = inputQuery(caption,message,defaultvalue)
+if input ~= nil and 0 then
+   calltest(input)
+end
+
+{$ASM}
+[enable]
+nop
+[disable]
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry Color="20000000">
+      <Description>Change of fstp qword ptr [eax]</Description>
+      <AddressString>061FFCB8</AddressString>
+      <Before>
+        <Byte>B8</Byte>
+        <Byte>60</Byte>
+        <Byte>B4</Byte>
+        <Byte>78</Byte>
+        <Byte>14</Byte>
+      </Before>
+      <Actual>
+        <Byte>DD</Byte>
+        <Byte>18</Byte>
+      </Actual>
+      <After>
+        <Byte>DD</Byte>
+        <Byte>45</Byte>
+        <Byte>08</Byte>
+        <Byte>83</Byte>
+        <Byte>EC</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of fld qword ptr [ebp+08]</Description>
+      <AddressString>061FFCA8</AddressString>
+      <Before>
+        <Byte>5D</Byte>
+        <Byte>F8</Byte>
+        <Byte>DD</Byte>
+        <Byte>45</Byte>
+        <Byte>F8</Byte>
+      </Before>
+      <Actual>
+        <Byte>DD</Byte>
+        <Byte>45</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>DE</Byte>
+        <Byte>C1</Byte>
+        <Byte>DD</Byte>
+        <Byte>5D</Byte>
+        <Byte>F8</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of fld qword ptr [ebp+08]</Description>
+      <AddressString>061FFC8E</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>EC</Byte>
+        <Byte>83</Byte>
+        <Byte>EC</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>DD</Byte>
+        <Byte>45</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>D9</Byte>
+        <Byte>EE</Byte>
+        <Byte>DF</Byte>
+        <Byte>F1</Byte>
+        <Byte>DD</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of fstp st(0)</Description>
+      <AddressString>061FFC95</AddressString>
+      <Before>
+        <Byte>08</Byte>
+        <Byte>D9</Byte>
+        <Byte>EE</Byte>
+        <Byte>DF</Byte>
+        <Byte>F1</Byte>
+      </Before>
+      <Actual>
+        <Byte>DD</Byte>
+        <Byte>D8</Byte>
+      </Actual>
+      <After>
+        <Byte>7A</Byte>
+        <Byte>37</Byte>
+        <Byte>73</Byte>
+        <Byte>35</Byte>
+        <Byte>B8</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of fstp qword ptr [ebp-08]</Description>
+      <AddressString>061FFCA2</AddressString>
+      <Before>
+        <Byte>B4</Byte>
+        <Byte>78</Byte>
+        <Byte>14</Byte>
+        <Byte>DD</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>DD</Byte>
+        <Byte>5D</Byte>
+        <Byte>F8</Byte>
+      </Actual>
+      <After>
+        <Byte>DD</Byte>
+        <Byte>45</Byte>
+        <Byte>F8</Byte>
+        <Byte>DD</Byte>
+        <Byte>45</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of fstp qword ptr [esp]</Description>
+      <AddressString>061FFCC3</AddressString>
+      <Before>
+        <Byte>EC</Byte>
+        <Byte>04</Byte>
+        <Byte>83</Byte>
+        <Byte>EC</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>DD</Byte>
+        <Byte>1C</Byte>
+        <Byte>24</Byte>
+      </Actual>
+      <After>
+        <Byte>6A</Byte>
+        <Byte>00</Byte>
+        <Byte>E8</Byte>
+        <Byte>33</Byte>
+        <Byte>D3</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of fld qword ptr [eax]</Description>
+      <AddressString>1C314DC5</AddressString>
+      <Before>
+        <Byte>B8</Byte>
+        <Byte>60</Byte>
+        <Byte>B4</Byte>
+        <Byte>FF</Byte>
+        <Byte>14</Byte>
+      </Before>
+      <Actual>
+        <Byte>DD</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>C3</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of fld qword ptr [ebp+08]</Description>
+      <AddressString>061AE34E</AddressString>
+      <Before>
+        <Byte>8B</Byte>
+        <Byte>EC</Byte>
+        <Byte>83</Byte>
+        <Byte>EC</Byte>
+        <Byte>08</Byte>
+      </Before>
+      <Actual>
+        <Byte>DD</Byte>
+        <Byte>45</Byte>
+        <Byte>08</Byte>
+      </Actual>
+      <After>
+        <Byte>DD</Byte>
+        <Byte>5D</Byte>
+        <Byte>F8</Byte>
+        <Byte>90</Byte>
+        <Byte>90</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call RunicDust:Reset</Description>
+      <AddressString>1DB9B70A</AddressString>
+      <Before>
+        <Byte>FE</Byte>
+        <Byte>FF</Byte>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>10</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>51</Byte>
+        <Byte>F8</Byte>
+        <Byte>36</Byte>
+        <Byte>E8</Byte>
+      </Actual>
+      <After>
+        <Byte>33</Byte>
+        <Byte>C0</Byte>
+        <Byte>8D</Byte>
+        <Byte>65</Byte>
+        <Byte>FC</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of je RunicDust:GetCount+43</Description>
+      <AddressString>1DB9B6AE</AddressString>
+      <Before>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>10</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>0B</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>05</Byte>
+        <Byte>10</Byte>
+        <Byte>EE</Byte>
+        <Byte>91</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of fstp qword ptr [eax]</Description>
+      <AddressString>1C0853B9</AddressString>
+      <Before>
+        <Byte>B8</Byte>
+        <Byte>D8</Byte>
+        <Byte>B4</Byte>
+        <Byte>68</Byte>
+        <Byte>19</Byte>
+      </Before>
+      <Actual>
+        <Byte>DD</Byte>
+        <Byte>18</Byte>
+      </Actual>
+      <After>
+        <Byte>C9</Byte>
+        <Byte>C3</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of jae DrillObject:Update+393</Description>
+      <AddressString>1DE98589</AddressString>
+      <Before>
+        <Byte>F0</Byte>
+        <Byte>4E</Byte>
+        <Byte>83</Byte>
+        <Byte>FE</Byte>
+        <Byte>03</Byte>
+      </Before>
+      <Actual>
+        <Byte>0F</Byte>
+        <Byte>83</Byte>
+        <Byte>6C</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>CE</Byte>
+        <Byte>C1</Byte>
+        <Byte>E1</Byte>
+        <Byte>02</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of call Ability:IsInCoolDown</Description>
+      <AddressString>1DE9CBAE</AddressString>
+      <Before>
+        <Byte>08</Byte>
+        <Byte>83</Byte>
+        <Byte>EC</Byte>
+        <Byte>0C</Byte>
+        <Byte>57</Byte>
+      </Before>
+      <Actual>
+        <Byte>E8</Byte>
+        <Byte>7D</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>83</Byte>
+        <Byte>C4</Byte>
+        <Byte>10</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of je PickaxePowerController:UpdateProgressEvent+3b</Description>
+      <AddressString>1DE64C98</AddressString>
+      <Before>
+        <Byte>2E</Byte>
+        <Byte>66</Byte>
+        <Byte>13</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>74</Byte>
+        <Byte>29</Byte>
+      </Actual>
+      <After>
+        <Byte>D9</Byte>
+        <Byte>EE</Byte>
+        <Byte>D9</Byte>
+        <Byte>5D</Byte>
+        <Byte>F8</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of fstp dword ptr [eax]</Description>
+      <AddressString>1DEBA6F4</AddressString>
+      <Before>
+        <Byte>B8</Byte>
+        <Byte>C4</Byte>
+        <Byte>2E</Byte>
+        <Byte>66</Byte>
+        <Byte>13</Byte>
+      </Before>
+      <Actual>
+        <Byte>D9</Byte>
+        <Byte>18</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>05</Byte>
+        <Byte>D0</Byte>
+        <Byte>BD</Byte>
+        <Byte>DC</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov eax,13662EC4</Description>
+      <AddressString>1DEBA6E3</AddressString>
+      <Before>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>75</Byte>
+        <Byte>27</Byte>
+      </Before>
+      <Actual>
+        <Byte>B8</Byte>
+        <Byte>C4</Byte>
+        <Byte>2E</Byte>
+        <Byte>66</Byte>
+        <Byte>13</Byte>
+      </Actual>
+      <After>
+        <Byte>D9</Byte>
+        <Byte>00</Byte>
+        <Byte>D9</Byte>
+        <Byte>45</Byte>
+        <Byte>08</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of mov eax,13662EC4</Description>
+      <AddressString>1DEBA6EF</AddressString>
+      <Before>
+        <Byte>D9</Byte>
+        <Byte>45</Byte>
+        <Byte>08</Byte>
+        <Byte>DE</Byte>
+        <Byte>C1</Byte>
+      </Before>
+      <Actual>
+        <Byte>B8</Byte>
+        <Byte>C4</Byte>
+        <Byte>2E</Byte>
+        <Byte>66</Byte>
+        <Byte>13</Byte>
+      </Actual>
+      <After>
+        <Byte>D9</Byte>
+        <Byte>18</Byte>
+        <Byte>8B</Byte>
+        <Byte>05</Byte>
+        <Byte>D0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of jne PickaxePowerController:BoostActiveDuration+3a</Description>
+      <AddressString>1DEBA6E1</AddressString>
+      <Before>
+        <Byte>3D</Byte>
+        <Byte>03</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>75</Byte>
+        <Byte>27</Byte>
+      </Actual>
+      <After>
+        <Byte>B8</Byte>
+        <Byte>C4</Byte>
+        <Byte>2E</Byte>
+        <Byte>66</Byte>
+        <Byte>13</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of jnl PickaxePowerController:SetBaseDuration+22</Description>
+      <AddressString>1DE4D30D</AddressString>
+      <Before>
+        <Byte>08</Byte>
+        <Byte>83</Byte>
+        <Byte>7D</Byte>
+        <Byte>08</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>7D</Byte>
+        <Byte>0B</Byte>
+      </Actual>
+      <After>
+        <Byte>D9</Byte>
+        <Byte>EE</Byte>
+        <Byte>B8</Byte>
+        <Byte>BC</Byte>
+        <Byte>2E</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of fld1 </Description>
+      <AddressString>1DE8A275</AddressString>
+      <Before>
+        <Byte>2E</Byte>
+        <Byte>66</Byte>
+        <Byte>13</Byte>
+        <Byte>D9</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>D9</Byte>
+        <Byte>E8</Byte>
+      </Actual>
+      <After>
+        <Byte>DE</Byte>
+        <Byte>E9</Byte>
+        <Byte>B8</Byte>
+        <Byte>C4</Byte>
+        <Byte>2E</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of fsubp st(1),st(0)</Description>
+      <AddressString>1DE8A277</AddressString>
+      <Before>
+        <Byte>13</Byte>
+        <Byte>D9</Byte>
+        <Byte>00</Byte>
+        <Byte>D9</Byte>
+        <Byte>E8</Byte>
+      </Before>
+      <Actual>
+        <Byte>DE</Byte>
+        <Byte>E9</Byte>
+      </Actual>
+      <After>
+        <Byte>B8</Byte>
+        <Byte>C4</Byte>
+        <Byte>2E</Byte>
+        <Byte>66</Byte>
+        <Byte>13</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="20000000">
+      <Description>Change of jne SubscriptionIAPController:&lt;UpdateSubscriptionStatus&gt;m__0+45</Description>
+      <AddressString>1B2B4374</AddressString>
+      <Before>
+        <Byte>B6</Byte>
+        <Byte>45</Byte>
+        <Byte>0C</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+      </Before>
+      <Actual>
+        <Byte>75</Byte>
+        <Byte>37</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>05</Byte>
+        <Byte>08</Byte>
+        <Byte>F3</Byte>
+        <Byte>5F</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>ArtLvlUp</Name>
+      <Address>0CA40010</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>BlockAmount</Name>
+      <Address>08040030</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>ArtLvl</Name>
+      <Address>07EC0010</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>ArtLvlUpg</Name>
+      <Address>0C860020</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>ArtLvlTrsh</Name>
+      <Address>0CA40020</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>RunicAdd</Name>
+      <Address>08040000</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>EP_Add</Name>
+      <Address>08040020</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>AD_Add</Name>
+      <Address>08040010</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+  <Structures StructVersion="2">
+    <Structure Name="String" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="8" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000008" Description="Length" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="12" Vartype="Unicode String" Bytesize="128" OffsetHex="0000000C" Description="Value" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+  </Structures>
+</CheatTable>
